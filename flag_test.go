@@ -573,6 +573,7 @@ func TestShorthandLookup(t *testing.T) {
 	flag := f.ShorthandLookup("a")
 	if flag == nil {
 		t.Errorf("f.ShorthandLookup(\"a\") returned nil")
+		return // required
 	}
 	if flag.Name != "boola" {
 		t.Errorf("f.ShorthandLookup(\"a\") found %q instead of \"boola\"", flag.Name)

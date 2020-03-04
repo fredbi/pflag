@@ -30,9 +30,7 @@ func (s *stringArrayValue) Append(val string) error {
 
 func (s *stringArrayValue) Replace(val []string) error {
 	out := make([]string, len(val))
-	for i, d := range val {
-		out[i] = d
-	}
+	copy(out, val)
 	*s.value = out
 	return nil
 }
@@ -53,6 +51,9 @@ func (s *stringArrayValue) String() string {
 }
 
 func stringArrayConv(sval string) (interface{}, error) {
+	if len(sval) == 0 {
+		return []string{}, nil
+	}
 	sval = sval[1 : len(sval)-1]
 	// An empty string would cause a array with one (empty) string
 	if len(sval) == 0 {
